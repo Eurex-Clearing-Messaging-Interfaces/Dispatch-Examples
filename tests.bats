@@ -51,6 +51,8 @@ tcpPortDisp() {
     echo $output
     [ "$status" -eq "0" ]
 
+    sleep 5 # some time to send the messag
+    
     run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "broadcast.ABCFR_ABCFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
     [ "$status" -eq "0" ]
@@ -70,6 +72,8 @@ tcpPortDisp() {
     echo $output
     [ "$status" -eq "0" ]
 
+    sleep 5 # some time to send the message
+    
     run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "broadcast.DEFFR_DEFFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
     [ "$status" -eq "0" ]
@@ -87,6 +91,8 @@ tcpPortDisp() {
 
     run qpid-send -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "request.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
     [ "$status" -eq "0" ]
+
+    sleep 5 # some time to send the messag
 
     run qpid-receive -b admin/admin@ecag-fixml-dev1:$tcpFixml --connection-options "{ protocol: amqp0-10, sasl_mechanism: PLAIN }" -a "request_be.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
@@ -107,6 +113,8 @@ tcpPortDisp() {
     echo $output
     [ "$status" -eq "0" ]
 
+    sleep 5 # some time to send the messag
+    
     run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "response.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
     [ "$status" -eq "0" ]
@@ -134,7 +142,8 @@ tcpPortDisp() {
     echo $output
     [ "$status" -eq "0" ]
 
-    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "broadcast.ABCFR_ABCFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    sleep 5 # some time to send the messag
+
     echo $output
     [ "$status" -eq "0" ]
     [ "${lines[0]}" != "0" ]
@@ -152,6 +161,8 @@ tcpPortDisp() {
     run qpid-send -b admin/admin@ecag-fixml-dev1:$tcpFixml -a "broadcast/broadcast.DEFFR.TradeConfirmation; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
     echo $output
     [ "$status" -eq "0" ]
+
+    sleep 5 # some time to send the messag
 
     run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "broadcast.DEFFR_DEFFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
@@ -171,6 +182,8 @@ tcpPortDisp() {
     run qpid-send -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "request.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
     [ "$status" -eq "0" ]
 
+    sleep 5 # some time to send the messag
+
     run qpid-receive -b admin/admin@ecag-fixml-dev1:$tcpFixml --connection-options "{ protocol: amqp0-10, sasl_mechanism: PLAIN }" -a "request_be.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
     [ "$status" -eq "0" ]
@@ -189,6 +202,8 @@ tcpPortDisp() {
     run qpid-send -b admin/admin@ecag-fixml-dev1:$tcpFixml -a "response/response.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
     echo $output
     [ "$status" -eq "0" ]
+
+    sleep 5 # some time to send the messag
 
     run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "response.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
