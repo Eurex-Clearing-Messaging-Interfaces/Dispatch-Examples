@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Eurex-Clearing-Messaging-Interfaces/Dispatch-Examples.svg?branch=master)](https://travis-ci.org/Eurex-Clearing-Messaging-Interfaces/Dispatch-Examples)
+
 # Apache Qpid Dispatch examples
 
 ## Apache Qpid Dispatch
