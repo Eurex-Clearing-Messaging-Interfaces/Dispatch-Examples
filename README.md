@@ -23,6 +23,7 @@ Dispatch can be configured in two different modes - link routing or message rout
 The example configuration in this repository covers all the use cases mentioned above. It opens two different connections to the FIXML broker using two different accounts:
 - ABCFR_ABCFRALMMACC1
 - DEFFR_DEFFRALMMACC1
+
 The authentication against the FIXML broker is using SSL Client Authentication.
 
 Additionally, it sets up an listener which is using username / password authentication and has two accounts for user1 and user2. These users can be used to send requests and receive broadcasts or responses. *Currently, there is no policy configuration in this example which would restrict the access to different queues for different users.*
