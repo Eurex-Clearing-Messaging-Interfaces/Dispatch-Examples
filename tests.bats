@@ -48,3 +48,61 @@ tcpPortDisp() {
     [ "$status" -eq "0" ]
     [ "${lines[0]}" != "0" ]
 }
+
+@test "Test TradeConfirmation broadcasts on DEFFR->user2 using link routing" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-send -b admin/admin@ecag-fixml-dev1:$tcpFixml -a "broadcast/broadcast.DEFFR.TradeConfirmation; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
+    echo $output
+    [ "$status" -eq "0" ]
+
+    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "broadcast.DEFFR_DEFFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    echo $output
+    [ "$status" -eq "0" ]
+    [ "${lines[0]}" != "0" ]
+}
+
+@test "Test request ABCFR->user1 using link routing" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-send -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "request.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
+    [ "$status" -eq "0" ]
+
+    run qpid-receive -b admin/admin@ecag-fixml-dev1:$tcpFixml --connection-options "{ protocol: amqp0-10, sasl_mechanism: PLAIN }" -a "request_be.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    echo $output
+    [ "$status" -eq "0" ]
+    [ "${lines[0]}" != "0" ]
+}
+
+@test "Test response on ABCFR->user1 using link routing" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-send -b admin/admin@ecag-fixml-dev1:$tcpFixml -a "response/response.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
+    echo $output
+    [ "$status" -eq "0" ]
+
+    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "response.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    echo $output
+    [ "$status" -eq "0" ]
+    [ "${lines[0]}" != "0" ]
+}
+
+
