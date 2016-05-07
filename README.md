@@ -29,6 +29,8 @@ Additionally, it sets up an listener which is using username / password authenti
 
 There are two separate example configurations. One is using the message routing and the other is using the link routing.
 
+To use the examples in different environment, the hostnames / port numbers and the SSL certificates have to be adapted.
+
 ## Integration tests
 
 The project is using Travis-CI to run its own integration tests. The tests are executed using Docker images which contain the AMQP broker with configuration corresponding to Eurex Clearing FIXML Interface as well as the Dispatch router. The details of the Travis-CI integration can be found in the .travis.yml file.
