@@ -6,8 +6,8 @@
             "maxConnPerUser": 10,
             "maxConnPerHost": 10,
             "userGroups": {
-                "users-ro": "user1@QPID",
-                "users-rw": "user2@QPID",
+                "users-ro": "user2@QPID",
+                "users-rw": "user1@QPID",
                 "admins": "admin"
             },
             "ingressHostGroups": {
@@ -50,8 +50,8 @@
             "maxConnPerUser": 10,
             "maxConnPerHost": 10,
             "userGroups": {
-                "users-ro": "user1@QPID",
-                "users-rw": "user2@QPID",
+                "users-ro": "user2@QPID",
+                "users-rw": "user1@QPID",
                 "admins": "admin"
             },
             "ingressHostGroups": {
@@ -94,8 +94,8 @@
             "maxConnPerUser": 10,
             "maxConnPerHost": 10,
             "userGroups": {
-                "users-ro": "user1@QPID",
-                "users-rw": "user2@QPID",
+                "users-ro": "user2@QPID",
+                "users-rw": "user1@QPID",
                 "admins": "admin"
             },
             "ingressHostGroups": {
