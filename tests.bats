@@ -121,6 +121,33 @@ tcpPortDisp() {
     [ "${lines[0]}" != "0" ]
 }
 
+@test "Test request ABCFR->user2 using link routing - should be forbidden by policy" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-send -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "request.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
+    [ "$status" -ne "0" ]
+}
+
+@test "Test response on ABCFR->user2 using link routing - should be forbidden by policy" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "response.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    echo $output
+    [ "$status" -ne "0" ]
+}
+
 ##########
 ##########
 #
@@ -209,5 +236,32 @@ tcpPortDisp() {
     echo $output
     [ "$status" -eq "0" ]
     [ "${lines[0]}" != "0" ]
+}
+
+@test "Test request ABCFR->user2 using message routing - should be forbidden by policy" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-send -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "request.ABCFR_ABCFRALMMACC1; { node: { type: topic}, assert: never, create: never }" -m 1 --durable yes --content-size 1024
+    [ "$status" -ne "0" ]
+}
+
+@test "Test response on ABCFR->user2 using message routing - should be forbidden by policy" {
+    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    tcpFixml=$(tcpPortFixml)
+
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    tcpDisp=$(tcpPortDisp)
+
+    sleep 5 # give the image time to start
+
+    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user2@QPID, password: 123456 }" -a "response.ABCFR_ABCFRALMMACC1; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
+    echo $output
+    [ "$status" -ne "0" ]
 }
 
