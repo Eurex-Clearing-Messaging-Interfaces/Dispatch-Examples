@@ -171,6 +171,7 @@ tcpPortDisp() {
 
     sleep 5 # some time to send the messag
 
+    run qpid-receive -b ecag-fixml-dev1:$tcpDisp --connection-options "{ protocol: amqp1.0, sasl_mechanism: PLAIN, username: user1@QPID, password: 123456 }" -a "broadcast.ABCFR_ABCFRALMMACC1.TradeConfirmation; { node: { type: queue}, assert: never, create: never }" -m 1 --timeout 5 --report-total --report-header no --print-content no
     echo $output
     [ "$status" -eq "0" ]
     [ "${lines[0]}" != "0" ]
