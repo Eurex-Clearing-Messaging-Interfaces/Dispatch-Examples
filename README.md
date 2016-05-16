@@ -8,6 +8,8 @@ The Dispatch router is an AMQP 1.0 router that provides advanced interconnect fo
 
 It can be used together with Eurex Clearing AMQP interfaces, which support AMQP 1.0. More details about Dispatch router can be found on [Apache Qpid website](http://qpid.apache.org/components/dispatch-router/index.html)
 
+*These examples are currently written and tested against development versions of Qpid Dispatch 0.6.0.*
+
 ## Use cases
 
 Dispatch router enables many new use cases which were not possible in the past:
@@ -28,7 +30,7 @@ The example configuration in this repository covers all the use cases mentioned 
 
 The authentication against the FIXML broker is using SSL Client Authentication.
 
-Additionally, it sets up an listener which is using username / password authentication and has two accounts for user1 and user2. These users can be used to send requests and receive broadcasts or responses. *Currently, there is no policy configuration in this example which would restrict the access to different queues for different users.*
+Additionally, it sets up an listener which is using username / password authentication and has two accounts for user1 and user2. The access control policy is configured to allow user1 to receive all broadcasts as well as send requests and receive response. user1 is allowed to received broadcasts, but not to send any requests or receive responses.
 
 There are two separate example configurations. One is using the message routing and the other is using the link routing.
 

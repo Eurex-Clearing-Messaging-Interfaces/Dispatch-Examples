@@ -3,7 +3,7 @@
 FIXML_IMAGE="ecmi/fixml"
 FIXML_VERSION="sim"
 DISPATCH_IMAGE="scholzj/qpid-dispatch"
-DISPATCH_VERSION="0.6.0-rc1"
+DISPATCH_VERSION="devel"
 
 #setup() {
 #    export QPID_SSL_CERT_DB=sql:./tests/
