@@ -8,6 +8,8 @@ The Dispatch router is an AMQP 1.0 router that provides advanced interconnect fo
 
 It can be used together with Eurex Clearing AMQP interfaces, which support AMQP 1.0. More details about Dispatch router can be found on [Apache Qpid website](http://qpid.apache.org/components/dispatch-router/index.html)
 
+*These examples are currently written and tested against development versions of Qpid Dispatch 0.6.0.*
+
 ## Use cases
 
 Dispatch router enables many new use cases which were not possible in the past:
