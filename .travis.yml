@@ -5,10 +5,6 @@ sudo: required
 services:
   - docker
 
-addons:
-  hosts:
-    - ecag-fixml-dev1
-
 install:
   - sudo add-apt-repository ppa:duggan/bats --yes
   - sudo add-apt-repository ppa:qpid/released --yes
