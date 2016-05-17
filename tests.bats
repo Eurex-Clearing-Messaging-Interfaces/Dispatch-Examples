@@ -42,7 +42,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -63,7 +63,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -84,7 +84,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -104,7 +104,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -125,7 +125,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -138,7 +138,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -160,7 +160,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -181,7 +181,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -202,7 +202,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -222,7 +222,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -243,7 +243,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -256,7 +256,7 @@ tcpPortDisp() {
     contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml1 --link fixml:fixml2 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:fixml -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
