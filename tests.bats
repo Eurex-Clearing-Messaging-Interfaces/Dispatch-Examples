@@ -5,12 +5,6 @@ FIXML_VERSION="sim"
 DISPATCH_IMAGE="scholzj/qpid-dispatch"
 DISPATCH_VERSION="devel"
 
-#setup() {
-#    export QPID_SSL_CERT_DB=sql:./tests/
-#    export QPID_SSL_CERT_PASSWORD_FILE=./tests/pwdfile
-#    export QPID_SSL_CERT_NAME=ABCFR_ABCFRALMMACC1
-#}
-
 teardown() {
     sudo docker stop $contFixml
     sudo docker rm $contFixml
@@ -265,4 +259,3 @@ tcpPortDisp() {
     echo $output
     [ "$status" -ne "0" ]
 }
-
