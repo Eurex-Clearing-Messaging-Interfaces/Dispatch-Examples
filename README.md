@@ -42,4 +42,4 @@ The project is using Travis-CI to run its own integration tests. The tests are e
 
 ## Documentation
 
-More information about using Dispatch router together with Eurex Clearing AMQP interfaces can be found on the [Effective Messaging blog](http://blog.effectivemessaging.com/2015/08/using-apache-qpid-dispatch-router-to.html). More details about Eurex Clearing Messaging Interfaces can be found on [Eurex Clearing website](http://www.eurexclearing.com/clearing-en/technology/eurex-release14/system-documentation/system-documentation/861464?frag=861450)
+More information about using Dispatch router together with Eurex Clearing AMQP interfaces can be found on the [Effective Messaging blog](http://blog.effectivemessaging.com/2016/05/connecting-to-eurex-clearing-with.html). More details about Eurex Clearing Messaging Interfaces can be found on [Eurex Clearing website](http://www.eurexclearing.com/clearing-en/technology/eurex-release14/system-documentation/system-documentation/861464?frag=861450)
