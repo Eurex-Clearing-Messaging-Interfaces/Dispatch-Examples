@@ -7,9 +7,7 @@ DISPATCH_VERSION="0.6.0"
 
 teardown() {
     sudo docker stop $contFixml
-    sudo docker rm $contFixml
     sudo docker stop $contDisp
-    sudo docker rm $contDisp
 }
 
 tcpPortFixml() {
@@ -33,10 +31,10 @@ tcpPortDisp() {
 #########
 
 @test "Test TradeConfirmation broadcasts on ABCFR->user1 using link routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -54,10 +52,10 @@ tcpPortDisp() {
 }
 
 @test "Test TradeConfirmation broadcasts on DEFFR->user2 using link routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -75,10 +73,10 @@ tcpPortDisp() {
 }
 
 @test "Test request ABCFR->user1 using link routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -95,10 +93,10 @@ tcpPortDisp() {
 }
 
 @test "Test response on ABCFR->user1 using link routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -116,10 +114,10 @@ tcpPortDisp() {
 }
 
 @test "Test request ABCFR->user2 using link routing - should be forbidden by policy" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -129,10 +127,10 @@ tcpPortDisp() {
 }
 
 @test "Test response on ABCFR->user2 using link routing - should be forbidden by policy" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-link-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -151,10 +149,10 @@ tcpPortDisp() {
 ##########
 
 @test "Test TradeConfirmation broadcasts on ABCFR->user1 using message routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -172,10 +170,10 @@ tcpPortDisp() {
 }
 
 @test "Test TradeConfirmation broadcasts on DEFFR->user2 using message routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -193,10 +191,10 @@ tcpPortDisp() {
 }
 
 @test "Test request ABCFR->user1 using message routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -213,10 +211,10 @@ tcpPortDisp() {
 }
 
 @test "Test response on ABCFR->user1 using message routing" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -234,10 +232,10 @@ tcpPortDisp() {
 }
 
 @test "Test request ABCFR->user2 using message routing - should be forbidden by policy" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
@@ -247,10 +245,10 @@ tcpPortDisp() {
 }
 
 @test "Test response on ABCFR->user2 using message routing - should be forbidden by policy" {
-    contFixml=$(sudo docker run -P --name fixml -d $FIXML_IMAGE:$FIXML_VERSION)
+    contFixml=$(sudo docker run -P -d $FIXML_IMAGE:$FIXML_VERSION)
     tcpFixml=$(tcpPortFixml)
 
-    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link fixml:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
+    contDisp=$(sudo docker run -P -v $(pwd)/:/var/lib/qpid-dispatch/:z --link ${contFixml}:ecag-fixml-dev1 -d $DISPATCH_IMAGE:$DISPATCH_VERSION --config /var/lib/qpid-dispatch/qdrouterd-message-routing.conf)
     tcpDisp=$(tcpPortDisp)
 
     sleep 5 # give the image time to start
