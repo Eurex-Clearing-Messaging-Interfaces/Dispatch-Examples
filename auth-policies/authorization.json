@@ -8,7 +8,7 @@
             "allowUnknownUser": false,
             "groups": {
                 "users-ro": {
-                    "users": "user2",
+                    "users": "user2@QPID",
                     "remoteHosts": "*",
                     "maxSessions": 100,
                     "maxSenders": 0,
@@ -17,7 +17,7 @@
                     "targets": ""
                 },
                 "users-rw": {
-                    "users": "user1",
+                    "users": "user1@QPID",
                     "remoteHosts": "*",
                     "maxSessions": 100,
                     "maxSenders": 100,
