@@ -1,27 +1,15 @@
 [
-    ["policyRuleset",
+    ["vhost",
         {
-            "applicationName": "default",
+            "id": "default",
             "maxConnections": 100,
-            "maxConnPerUser": 10,
-            "maxConnPerHost": 10,
-            "userGroups": {
-                "users-ro": "user2@QPID",
-                "users-rw": "user1@QPID",
-                "admins": "admin"
-            },
-            "ingressHostGroups": {
-                "localhost": "127.0.0.1, ::1",
-                "everywhere": "*"
-            },
-            "ingressPolicies": {
-                "users-ro": "everywhere",
-                "users-rw": "everywhere",
-                "admins": "localhost"
-            },
-            "connectionAllowDefault": false,
-            "settings": {
+            "maxConnectionsPerUser": 10,
+            "maxConnectionsPerHost": 10,
+            "allowUnknownUser": false,
+            "groups": {
                 "users-ro": {
+                    "users": "user2",
+                    "remoteHosts": "*",
                     "maxSessions": 100,
                     "maxSenders": 0,
                     "maxReceivers": 100,
@@ -29,6 +17,8 @@
                     "targets": ""
                 },
                 "users-rw": {
+                    "users": "user1",
+                    "remoteHosts": "*",
                     "maxSessions": 100,
                     "maxSenders": 100,
                     "maxReceivers": 100,
@@ -36,7 +26,9 @@
                     "targets": "request.*"
                 },
                 "admins": {
-                    "allowDynamicSrc": true,
+                    "users": "admin",
+                    "remoteHosts": "127.0.0.1, ::1",
+                    "allowDynamicSource": true,
                     "sources": "$management",
                     "targets": "$management"
                 }
