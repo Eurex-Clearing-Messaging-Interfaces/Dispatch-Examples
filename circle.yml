@@ -9,7 +9,7 @@ dependencies:
   - sudo apt-get update -q
   - sudo apt-get install -q libsasl2-2 libsasl2-modules libsasl2-modules-db bats qpid-send qpid-receive
   - docker pull ecmi/fixml:sim
-  - docker pull scholzj/qpid-dispatch:0.7.0-rc2
+  - docker pull scholzj/qpid-dispatch:0.7.0
 
 test:
   override:
