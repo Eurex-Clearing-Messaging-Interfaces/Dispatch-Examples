@@ -3,7 +3,7 @@
 FIXML_IMAGE="ecmi/fixml"
 FIXML_VERSION="sim"
 DISPATCH_IMAGE="scholzj/qpid-dispatch"
-DISPATCH_VERSION="0.7.0"
+DISPATCH_VERSION="0.8.0-rc2"
 
 teardown() {
     sudo docker stop $contFixml
